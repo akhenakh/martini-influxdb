@@ -10,7 +10,7 @@ import (
 )
 
 // Logger returns a middleware handler that logs the request as it goes in and the response as it goes out.
-func InfluxDBLogger(client *influxdb.Client) martini.Handler {
+func Logger(client *influxdb.Client) martini.Handler {
 	return func(res http.ResponseWriter, req *http.Request, c martini.Context, log *log.Logger) {
 		start := time.Now()
 		log.Printf("Started %s %s", req.Method, req.URL.Path)
