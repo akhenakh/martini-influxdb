@@ -27,7 +27,6 @@ func Logger(client *influxdb.Client) martini.Handler {
 					[]interface{}{int64(t / time.Millisecond), rw.Status(), req.RequestURI, req.Method},
 				},
 			}
-			log.Println(s)
 			err := client.WriteSeries([]*influxdb.Series{s})
 			if err != nil {
 				log.Println(err)
