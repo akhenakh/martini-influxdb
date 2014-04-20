@@ -21,14 +21,16 @@ func Logger(client *influxdb.Client) martini.Handler {
 		log.Printf("Completed %v %s in %v\n", rw.Status(), http.StatusText(rw.Status()), t)
 		if client != nil {
 			s := &influxdb.Series{
-				Name:    "respTime",
-				Columns: []string{"method", "path", "duration"},
+				Name:    "resp_time",
+				Columns: []string{"duration", "code", "url", "method"},
 				Points: [][]interface{}{
-					[]interface{}{req.Proto},
-					[]interface{}{req.URL.RequestURI()},
-					[]interface{}{time.Millisecond * t},
+					[]interface{}{t / time.Millisecond},
+					[]interface{}{rw.Status()},
+					[]interface{}{req.RequestURI},
+					[]interface{}{req.Method},
 				},
 			}
+			log.Println(s)
 			err := client.WriteSeries([]*influxdb.Series{s})
 			if err != nil {
 				log.Println(err)
