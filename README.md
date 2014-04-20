@@ -1,7 +1,7 @@
 martini-influxdb
 ================
 
-Martini logger to influxDB
+A simple Martini logger to influxDB
 
 Use it in place of the Martini logger:
 
@@ -19,3 +19,13 @@ if err != nil {
 }
 m.Use(influxlogger.Logger(client))
 ```
+
+Then query for `code` as status code, `duration`, `url` and `method`
+
+```sql
+SELECT duration FROM resp_time WHERE code = 200
+```
+
+Note: This is using the REST api on every requests which is probably not what you want on heavy traffic but fun enough to play with InfluxDB on small project.
+
+![demo](https://github.com/akhenakh/martini-influxdb/raw/master/img/graph.png)
