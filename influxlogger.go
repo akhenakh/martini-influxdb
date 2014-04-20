@@ -24,10 +24,7 @@ func Logger(client *influxdb.Client) martini.Handler {
 				Name:    "resp_time",
 				Columns: []string{"duration", "code", "url", "method"},
 				Points: [][]interface{}{
-					[]interface{}{t / time.Millisecond},
-					[]interface{}{rw.Status()},
-					[]interface{}{req.RequestURI},
-					[]interface{}{req.Method},
+					[]interface{}{int64(t / time.Millisecond), rw.Status(), req.RequestURI, req.Method},
 				},
 			}
 			log.Println(s)
