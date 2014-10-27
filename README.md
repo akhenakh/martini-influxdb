@@ -28,4 +28,6 @@ SELECT duration FROM resp_time WHERE code = 200
 
 Note: This is using the REST api on every requests which is probably not what you want on heavy traffic but fun enough to play with InfluxDB on small project.
 
+Note: Remember, you should forget Martini see http://blog.codegangsta.io/blog/2014/05/19/my-thoughts-on-martini/
+
 ![demo](https://github.com/akhenakh/martini-influxdb/raw/master/img/graph.png)
